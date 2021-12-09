@@ -72,11 +72,14 @@ done
 # Install Casks
 
 CASKS=(
+  discord
   docker
   dropbox
   google-chrome
   google-drive
   iterm2
+  little-snitch
+  mark-text
   rectangle
   slack
   spotify
