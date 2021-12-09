@@ -45,12 +45,14 @@ for i in {1.."${SSH_NUM_KEYS}"}; do
 	grep "Host ${(P)SSH_USER}@${(P)HOST}" "${SSH_CONFIG_FILE}" >/dev/null 2>&1
 	if [[ $? == 1 ]]; then
 		cat >> "${SSH_CONFIG_FILE}" <<SSHCFG
-Host ${(P)SSH_USER}@${(P)HOST} 
+Host ${(P)SSH_USER}.${(P)HOST} 
     AddKeysToAgent yes
-    IgnoreUnknown UseKeychain
-    UseKeychain yes
+	HostName github.com
     IdentitiesOnly yes
     IdentityFile ~/.ssh/${(P)SSH_USER}_${(P)ALGORITHM}
+    IgnoreUnknown UseKeychain
+    UseKeychain yes
+	User git
 
 SSHCFG
 	fi
@@ -60,3 +62,9 @@ SSHCFG
 	echo "${(P)GITHUB_PAT}" | gh auth login --with-token
 	gh ssh-key add ${FILEPATH}.pub -t "$(whoami)@$(hostname)"
 done
+
+# Configure required file permissions
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/*
+chmod 644 ~/.ssh/*.pub
+chmod 644 ~/.ssh/config
