@@ -22,8 +22,7 @@ fi
 # Install
 
 rm -f ~/.env
-echo "${SCRIPT_DIR}"
-ln -s "${SCRIPT_DIR}/.env" ~/.env
+ln -s "${SCRIPT_DIR}/../.env" ~/.env
 
 ###############################################################################
 # DOTFILES
@@ -50,7 +49,7 @@ declare -A DOTFILES=(
   ["${SCRIPT_DIR}/../dotfiles/.zshrc"]="${HOME}/.zshrc"
 )
 
-for SRC DST in "${(kv)DOTFILES}"; do
+for SRC DST in "${(@kv)DOTFILES}"; do
   DST="${DOTFILES[${SRC}]}"
   rm -f "${DST}"
   ln -s "${SRC}" "${DST}"
