@@ -34,7 +34,7 @@ export PATH="/usr/local/bin:$PATH"
 # Go
 
 export GOPATH=/Users/aray/Code
-export PATH="$(go env GOPATH)/bin:$PATH"
+export PATH="$GOPATH/bin:$PATH"
 
 # General
 
